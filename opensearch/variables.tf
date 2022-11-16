@@ -14,7 +14,7 @@ variable "ssh_public_key" {
 }
 
 variable "security_list_ingress_security_rules_protocol" {
-  default = "TCP"
+  default = 6
 }
 
 variable "security_list_ingress_security_rules_source" {
