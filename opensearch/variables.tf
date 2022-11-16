@@ -1,15 +1,24 @@
 variable "compartment_id" {}
 variable "region" {}
-
-resource "oci_core_vcn" "opensearch-vcn" {
-  cidr_block     = "10.0.0.0/16"
-  compartment_id = var.compartment_id
+variable "instance_availability_domain" {}
+variable "instance_shape" {
+  default = "VM.Standard.A1.Flex"
 }
 
-resource "oci_core_subnet" "opensearch-subnet" {
-  cidr_block     = "10.0.0.0/24"
-  compartment_id = var.compartment_id
-  vcn_id         = oci_core_vcn.opensearch-vcn.id
+variable "security_list_ingress_security_rules_protocol" {
+  default = "TCP"
+}
+
+variable "security_list_ingress_security_rules_source" {
+  default = "0.0.0.0/0"
+}
+
+variable "security_list_ingress_security_rules_tcp_options_destination_port_api" {
+  default = 9200
+}
+
+variable "security_list_ingress_security_rules_tcp_options_destination_port_dashboard" {
+  default = 5601
 }
 
 variable "opensearch_cluster_data_node_count" {
@@ -41,7 +50,7 @@ variable "opensearch_cluster_display_name" {
 }
 
 variable "opensearch_cluster_freeform_tags" {
-  default = { "bar-key" = "value" }
+  default = { "ManagedByResourceManager" = "true" }
 }
 
 variable "opensearch_cluster_id" {

@@ -1,5 +1,46 @@
-resource "oci_opensearch_opensearch_cluster" "dev_opensearch_cluster" {
+### Virtual Cloud Network
+resource "oci_core_vcn" "opensearch-vcn" {
+  cidr_block     = "10.0.0.0/16"
+  compartment_id = var.compartment_id
+}
+
+resource "oci_core_subnet" "opensearch-subnet" {
+  cidr_block     = "10.0.0.0/24"
+  compartment_id = var.compartment_id
+  vcn_id         = oci_core_vcn.opensearch-vcn.id
+}
+
+resource "oci_core_security_list" "opensearch-security-list" {
+  compartment_id = var.compartment_id
+  vcn_id         = oci_core_vcn.opensearch-vcn.id
+  ingress_security_rules {
+    protocol = var.security_list_ingress_security_rules_protocol
+    source   = var.security_list_ingress_security_rules_source
+    tcp_options {
+      max = var.security_list_ingress_security_rules_tcp_options_destination_port_api
+      min = var.security_list_ingress_security_rules_tcp_options_destination_port_api
+    }
+  }
+  ingress_security_rules {
+    protocol = var.security_list_ingress_security_rules_protocol
+    source   = var.security_list_ingress_security_rules_source
+    tcp_options {
+      max = var.security_list_ingress_security_rules_tcp_options_destination_port_dashboard
+      min = var.security_list_ingress_security_rules_tcp_options_destination_port_dashboard
+    }
+  }
+}
+
+### OpenSearch Bastion
+resource "oci_core_instance" "opensearch_bastion" {
   #Required
+  availability_domain = var.instance_availability_domain
+  compartment_id      = var.compartment_id
+  shape               = var.instance_shape
+}
+
+### OpenSearch Cluster
+resource "oci_opensearch_opensearch_cluster" "dev_opensearch_cluster" {
   compartment_id                     = var.compartment_id
   data_node_count                    = var.opensearch_cluster_data_node_count
   data_node_host_memory_gb           = var.opensearch_cluster_data_node_host_memory_gb
@@ -20,18 +61,12 @@ resource "oci_opensearch_opensearch_cluster" "dev_opensearch_cluster" {
   vcn_compartment_id                 = var.compartment_id
   vcn_id                             = oci_core_vcn.opensearch-vcn.id
 
-  #Optional
   data_node_host_bare_metal_shape = var.opensearch_cluster_data_node_host_bare_metal_shape
-  freeform_tags = {
-    "managedByResouceManager" = true
-  }
+  freeform_tags                   = var.opensearch_cluster_freeform_tags
 }
 
 data "oci_opensearch_opensearch_clusters" "test_opensearch_clusters" {
-  #Required
   compartment_id = var.compartment_id
-  #Optional
+
   display_name = var.opensearch_cluster_display_name
-  #  id           = var.opensearch_cluster_id
-  #  state        = var.opensearch_cluster_state
 }
