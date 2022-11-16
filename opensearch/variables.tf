@@ -1,15 +1,15 @@
 variable "compartment_id" {}
 variable "region" {}
 
-resource "oci_core_vcn" "test_vcn" {
+resource "oci_core_vcn" "opensearch-vcn" {
   cidr_block     = "10.0.0.0/16"
   compartment_id = var.compartment_id
 }
 
-resource "oci_core_subnet" "test_subnet" {
+resource "oci_core_subnet" "opensearch-subnet" {
   cidr_block     = "10.0.0.0/24"
   compartment_id = var.compartment_id
-  vcn_id         = oci_core_vcn.test_vcn.id
+  vcn_id         = oci_core_vcn.opensearch-vcn.id
 }
 
 variable "opensearch_cluster_data_node_count" {

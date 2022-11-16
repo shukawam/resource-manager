@@ -16,9 +16,9 @@ resource "oci_opensearch_opensearch_cluster" "dev_opensearch_cluster" {
   opendashboard_node_host_ocpu_count = var.opensearch_cluster_opendashboard_node_host_ocpu_count
   software_version                   = var.opensearch_cluster_software_version
   subnet_compartment_id              = var.compartment_id
-  subnet_id                          = oci_core_subnet.test_subnet.id
+  subnet_id                          = oci_core_subnet.opensearch-subnet.id
   vcn_compartment_id                 = var.compartment_id
-  vcn_id                             = oci_core_vcn.test_vcn.id
+  vcn_id                             = oci_core_vcn.opensearch-vcn.id
 
   #Optional
   data_node_host_bare_metal_shape = var.opensearch_cluster_data_node_host_bare_metal_shape
