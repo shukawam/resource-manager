@@ -6,6 +6,10 @@ resource "oci_core_instance" "bastion_instance" {
     memory_in_gbs = "6"
     ocpus         = "1"
   }
+  source_details {
+    source_id   = "ocid1.image.oc1.phx.aaaaaaaaqdlspgo5d5tdew5m3ntswbkxfoclc35nvcv3r3a7a5wjwxphuoeq"
+    source_type = "image"
+  }
 
   display_name = var.instance_display_name
   create_vnic_details {
