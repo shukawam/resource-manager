@@ -21,7 +21,7 @@ variable "opensearch_cluster_data_node_host_bare_metal_shape" {
 }
 
 variable "opensearch_cluster_data_node_host_memory_gb" {
-  default = 10
+  default = 20
 }
 
 variable "opensearch_cluster_data_node_host_ocpu_count" {
@@ -57,7 +57,7 @@ variable "opensearch_cluster_master_node_host_bare_metal_shape" {
 }
 
 variable "opensearch_cluster_master_node_host_memory_gb" {
-  default = 16
+  default = 20
 }
 
 variable "opensearch_cluster_master_node_host_ocpu_count" {
@@ -73,7 +73,7 @@ variable "opensearch_cluster_opendashboard_node_count" {
 }
 
 variable "opensearch_cluster_opendashboard_node_host_memory_gb" {
-  default = 10
+  default = 8
 }
 
 variable "opensearch_cluster_opendashboard_node_host_ocpu_count" {
