@@ -1,6 +1,10 @@
 variable "compartment_id" {}
 variable "region" {}
-variable "instance_availability_domain" {}
+
+variable "instance_availability_domain" {
+  default = "AD-1"
+}
+
 variable "instance_shape" {
   default = "VM.Standard.A1.Flex"
 }
