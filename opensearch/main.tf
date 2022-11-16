@@ -38,7 +38,9 @@ resource "oci_core_instance" "opensearch_bastion" {
   compartment_id      = var.compartment_id
   shape               = var.instance_shape
 
-  metadata = var.instance_metadata
+  metadata = {
+    ssh_authorized_keys = var.ssh_public_key
+  }
 }
 
 ### OpenSearch Cluster
