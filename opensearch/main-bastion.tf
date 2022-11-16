@@ -7,7 +7,7 @@ resource "oci_core_instance" "bastion_instance" {
     ocpus         = "1"
   }
   source_details {
-    source_id   = "ocid1.image.oc1.phx.aaaaaaaaqdlspgo5d5tdew5m3ntswbkxfoclc35nvcv3r3a7a5wjwxphuoeq"
+    source_id   = "ocid1.image.oc1.phx.aaaaaaaahrywndmykfzoyeinsd7yvvyyianpgfvvazya55hy4ib2b7dnojxa"
     source_type = "image"
   }
 
