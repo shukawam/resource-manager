@@ -22,8 +22,9 @@ resource "oci_opensearch_opensearch_cluster" "dev_opensearch_cluster" {
 
   #Optional
   data_node_host_bare_metal_shape = var.opensearch_cluster_data_node_host_bare_metal_shape
-  #  defined_tags                      = map(oci_identity_tag_namespace.tag-namespace1.name.oci_identity_tag.tag1.name, var.opensearch_cluster_defined_tags_value)
-  freeform_tags = "managedByResourceManager"
+  freeform_tags = {
+    "managedByResouceManager" = true
+  }
 }
 
 data "oci_opensearch_opensearch_clusters" "test_opensearch_clusters" {
