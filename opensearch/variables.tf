@@ -25,7 +25,7 @@ variable "opensearch_cluster_data_node_host_memory_gb" {
 }
 
 variable "opensearch_cluster_data_node_host_ocpu_count" {
-  default = 2
+  default = 1
 }
 
 variable "opensearch_cluster_data_node_host_type" {
