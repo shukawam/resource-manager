@@ -9,8 +9,10 @@ variable "instance_shape" {
   default = "VM.Standard.A1.Flex"
 }
 
-variable "ssh_public_key" {
-  default = ""
+variable "instance_metadata" {
+  ssh_authorized_keys {
+    default = "over write by resource manager"
+  }
 }
 
 variable "security_list_ingress_security_rules_protocol" {
