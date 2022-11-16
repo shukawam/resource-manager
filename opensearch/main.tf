@@ -1,0 +1,36 @@
+resource "oci_opensearch_opensearch_cluster" "dev_opensearch_cluster" {
+  #Required
+  compartment_id                     = var.compartment_id
+  data_node_count                    = var.opensearch_cluster_data_node_count
+  data_node_host_memory_gb           = var.opensearch_cluster_data_node_host_memory_gb
+  data_node_host_ocpu_count          = var.opensearch_cluster_data_node_host_ocpu_count
+  data_node_host_type                = var.opensearch_cluster_data_node_host_type
+  data_node_storage_gb               = var.opensearch_cluster_data_node_storage_gb
+  display_name                       = var.opensearch_cluster_display_name
+  master_node_count                  = var.opensearch_cluster_master_node_count
+  master_node_host_memory_gb         = var.opensearch_cluster_master_node_host_memory_gb
+  master_node_host_ocpu_count        = var.opensearch_cluster_master_node_host_ocpu_count
+  master_node_host_type              = var.opensearch_cluster_master_node_host_type
+  opendashboard_node_count           = var.opensearch_cluster_opendashboard_node_count
+  opendashboard_node_host_memory_gb  = var.opensearch_cluster_opendashboard_node_host_memory_gb
+  opendashboard_node_host_ocpu_count = var.opensearch_cluster_opendashboard_node_host_ocpu_count
+  software_version                   = var.opensearch_cluster_software_version
+  subnet_compartment_id              = var.compartment_id
+  subnet_id                          = oci_core_subnet.test_subnet.id
+  vcn_compartment_id                 = var.compartment_id
+  vcn_id                             = oci_core_vcn.test_vcn.id
+
+  #Optional
+  data_node_host_bare_metal_shape = var.opensearch_cluster_data_node_host_bare_metal_shape
+  #  defined_tags                      = map(oci_identity_tag_namespace.tag-namespace1.name.oci_identity_tag.tag1.name, var.opensearch_cluster_defined_tags_value)
+  freeform_tags = "managedByResourceManager"
+}
+
+data "oci_opensearch_opensearch_clusters" "test_opensearch_clusters" {
+  #Required
+  compartment_id = var.compartment_id
+  #Optional
+  display_name = var.opensearch_cluster_display_name
+  #  id           = var.opensearch_cluster_id
+  #  state        = var.opensearch_cluster_state
+}
