@@ -1,5 +1,5 @@
 output "bastion_ip" {
-  value = oci_core_instance.opensearch_bastion.public_ip
+  value = oci_core_instance.bastion_instance.public_ip
 }
 
 output "opendashboard_private_ip" {
