@@ -9,6 +9,10 @@ variable "instance_shape" {
   default = "VM.Standard.A1.Flex"
 }
 
+variable "ssh_public_key" {
+  default = ""
+}
+
 variable "security_list_ingress_security_rules_protocol" {
   default = "TCP"
 }
