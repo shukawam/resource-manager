@@ -12,11 +12,29 @@ variable "instance_availability_domain" {
 variable "instance_shape" {
   default = "VM.Standard.A1.Flex"
 }
+variable "instance_shape_memory" {
+  default = 6
+}
+variable "instance_shape_ocpus" {
+  default = 1
+}
 variable "ssh_public_key" {
   description = "SSH Public Key"
 }
+variable "instance_source_id" {
+  default = "ocid1.image.oc1.phx.aaaaaaaahrywndmykfzoyeinsd7yvvyyianpgfvvazya55hy4ib2b7dnojxa"
+}
+variable "instance_source_type" {
+  default = "image"
+}
 
 ### network
+variable "vcn_cidr_block" {
+  default = "10.0.0.0/16"
+}
+variable "subnet_cidr_block" {
+  default = "10.0.0.0/24"
+}
 variable "security_list_ingress_security_rules_protocol" {
   default = 6 # TCP
 }

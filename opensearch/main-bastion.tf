@@ -3,12 +3,12 @@ resource "oci_core_instance" "bastion_instance" {
   compartment_id      = var.compartment_id
   shape               = var.instance_shape
   shape_config {
-    memory_in_gbs = "6"
-    ocpus         = "1"
+    memory_in_gbs = var.instance_shape_memory
+    ocpus         = var.instance_shape_ocpus
   }
   source_details {
-    source_id   = "ocid1.image.oc1.phx.aaaaaaaahrywndmykfzoyeinsd7yvvyyianpgfvvazya55hy4ib2b7dnojxa"
-    source_type = "image"
+    source_id   = var.instance_source_id
+    source_type = var.instance_source_type
   }
 
   display_name = var.instance_display_name

@@ -1,12 +1,13 @@
 resource "oci_core_vcn" "opensearch-vcn" {
-  cidr_block     = "10.0.0.0/16"
+  cidr_block     = var.vcn_cidr_block
   compartment_id = var.compartment_id
 }
 
 resource "oci_core_subnet" "opensearch-subnet" {
-  cidr_block     = "10.0.0.0/24"
+  cidr_block     = var.subnet_cidr_block
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.opensearch-vcn.id
+  security_list_ids = oci_core_security_list.opensearch-security-list.id
 }
 
 resource "oci_core_security_list" "opensearch-security-list" {
