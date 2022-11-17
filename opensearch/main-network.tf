@@ -4,9 +4,9 @@ resource "oci_core_vcn" "opensearch-vcn" {
 }
 
 resource "oci_core_subnet" "opensearch-subnet" {
-  cidr_block        = var.subnet_cidr_block
-  compartment_id    = var.compartment_id
-  vcn_id            = oci_core_vcn.opensearch-vcn.id
+  cidr_block     = var.subnet_cidr_block
+  compartment_id = var.compartment_id
+  vcn_id         = oci_core_vcn.opensearch-vcn.id
   # security_list_ids = data.oci_core_security_lists.opensearch-security-lists.security_lists
 }
 
@@ -29,4 +29,18 @@ resource "oci_core_security_list" "opensearch-security-list" {
       min = var.security_list_ingress_security_rules_tcp_options_destination_port_dashboard
     }
   }
+}
+
+resource "oci_core_route_table" "opensearch-route-table" {
+  compartment_id = var.compartment_id
+  vcn_id         = oci_core_vcn.opensearch-vcn.id
+  route_rules {
+    network_entity_id = oci_core_internet_gateway.opensearch-internet-gateway.id
+  }
+}
+
+resource "oci_core_internet_gateway" "opensearch-internet-gateway" {
+  compartment_id = var.compartment_id
+  vcn_id         = oci_core_vcn.opensearch-vcn.id
+  enabled        = var.internet_gateway_enabled
 }

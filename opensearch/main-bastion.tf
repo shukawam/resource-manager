@@ -21,4 +21,44 @@ resource "oci_core_instance" "bastion_instance" {
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
   }
+  agent_config {
+    is_management_disabled = "false"
+    is_monitoring_disabled = "false"
+    plugins_config {
+      desired_state = "DISABLED"
+      name          = "Vulnerability Scanning"
+    }
+    plugins_config {
+      desired_state = "DISABLED"
+      name          = "Oracle Java Management Service"
+    }
+    plugins_config {
+      desired_state = "ENABLED"
+      name          = "OS Management Service Agent"
+    }
+    plugins_config {
+      desired_state = "DISABLED"
+      name          = "Management Agent"
+    }
+    plugins_config {
+      desired_state = "ENABLED"
+      name          = "Custom Logs Monitoring"
+    }
+    plugins_config {
+      desired_state = "ENABLED"
+      name          = "Compute Instance Run Command"
+    }
+    plugins_config {
+      desired_state = "ENABLED"
+      name          = "Compute Instance Monitoring"
+    }
+    plugins_config {
+      desired_state = "DISABLED"
+      name          = "Block Volume Management"
+    }
+    plugins_config {
+      desired_state = "DISABLED"
+      name          = "Bastion"
+    }
+  }
 }
