@@ -31,16 +31,16 @@ resource "oci_core_security_list" "opensearch-security-list" {
   }
 }
 
-resource "oci_core_internet_gateway" "opensearch-internet-gateway" {
-  compartment_id = var.compartment_id
-  vcn_id         = oci_core_vcn.opensearch-vcn.id
-  enabled        = var.internet_gateway_enabled
-}
+# resource "oci_core_internet_gateway" "opensearch-internet-gateway" {
+#   compartment_id = var.compartment_id
+#   vcn_id         = oci_core_vcn.opensearch-vcn.id
+#   enabled        = var.internet_gateway_enabled
+# }
 
-resource "oci_core_route_table" "opensearch-route-table" {
-  compartment_id = var.compartment_id
-  vcn_id         = oci_core_vcn.opensearch-vcn.id
-  route_rules {
-    network_entity_id = oci_core_internet_gateway.opensearch-internet-gateway.id
-  }
-}
+# resource "oci_core_route_table" "opensearch-route-table" {
+#   compartment_id = var.compartment_id
+#   vcn_id         = oci_core_vcn.opensearch-vcn.id
+#   route_rules {
+#     network_entity_id = oci_core_internet_gateway.opensearch-internet-gateway.id
+#   }
+# }
