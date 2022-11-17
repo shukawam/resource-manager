@@ -47,6 +47,10 @@ variable "security_list_ingress_security_rules_tcp_options_destination_port_api"
 variable "security_list_ingress_security_rules_tcp_options_destination_port_dashboard" {
   default = 5601
 }
+variable "internet_gateway_enabled" {
+  default = true
+}
+
 
 ### OpenSearch Cluster
 variable "opensearch_cluster_data_node_count" {
