@@ -32,28 +32,12 @@ variable "instance_source_type" {
 }
 
 ### network
-variable "vcn_cidr_block" {
-  default = "10.0.0.0/16"
-}
-variable "subnet_cidr_block" {
-  default = "10.0.0.0/24"
-}
-variable "security_list_ingress_security_rules_protocol" {
-  default = 6 # TCP
-}
-variable "security_list_ingress_security_rules_source" {
-  default = "0.0.0.0/0"
-}
 variable "security_list_ingress_security_rules_tcp_options_destination_port_api" {
   default = 9200
 }
 variable "security_list_ingress_security_rules_tcp_options_destination_port_dashboard" {
   default = 5601
 }
-variable "internet_gateway_enabled" {
-  default = true
-}
-
 
 ### OpenSearch Cluster
 variable "opensearch_cluster_data_node_count" {
