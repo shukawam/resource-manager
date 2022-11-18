@@ -18,6 +18,9 @@ variable "instance_shape_memory" {
 variable "instance_shape_ocpus" {
   default = 1
 }
+variable "private_key_location" {
+  description = "Your Private Key Location"
+}
 variable "ssh_public_key" {
   description = "SSH Public Key"
 }
