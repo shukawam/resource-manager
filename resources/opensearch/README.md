@@ -2,6 +2,10 @@
 
 OCI Search Service with OpenSearch を扱うための最低限の環境が作成されます．
 
+## magic link
+
+[deploy your tenancy](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/shukawam/resource-manager/raw/main/opensearch/zips/opensearch.zip)
+
 ## ovewview
 
 - Network
