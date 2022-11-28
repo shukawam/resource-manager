@@ -1,5 +1,5 @@
 resource "oci_core_instance" "bastion_instance" {
-  availability_domain = var.instance_availability_domain
+  availability_domain = local.availability_domain
   compartment_id      = var.compartment_id
   shape               = var.instance_shape
   shape_config {

@@ -1,13 +1,14 @@
 ### commons
-variable "compartment_id" {}
-variable "region" {}
+variable "compartment_id" {
+  description = "compartment ocid"
+}
+variable "region" {
+  description = "oci region(e.g. ap-tokyo-1, etc.)"
+}
 
 ### compute
 variable "instance_display_name" {
   default = "opensearch-bastion"
-}
-variable "instance_availability_domain" {
-  default = "TGjA:PHX-AD-1"
 }
 variable "instance_shape" {
   default = "VM.Standard.A1.Flex"
@@ -59,7 +60,7 @@ variable "opensearch_cluster_data_node_storage_gb" {
   default = 50
 }
 variable "opensearch_cluster_display_name" {
-  default = "shukawam-dev-cluster"
+  description = "display name"
 }
 variable "opensearch_cluster_freeform_tags" {
   default = { "ManagedByResourceManager" = "true" }
