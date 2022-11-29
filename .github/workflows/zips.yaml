@@ -61,7 +61,8 @@ jobs:
             zip -r $FILEZIP $FOLDER || { printf '\n Unable to create zips.\n'; exit 1;  }
             mv $FILEZIP ./zips
             cat ./examples/${RESOURCE}/$FILENAME > ./examples/${RESOURCE}/README.md
-            printf '\n## Magic Button \n[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)]('${MAGIC_LINK}${FILEZIP}')' >>./examples/${RESOURCE}/README.md  
+            printf '\n## Magic Button \n[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)]('${MAGIC_LINK}${FILEZIP}')' >>./examples/${RESOURCE}/README.md
+            printf '%s\n' '- '${RESOURCE}'
             [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)]('${MAGIC_LINK}${FILEZIP}')' >> ./examples/README.md
           fi
         done
