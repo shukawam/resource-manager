@@ -71,7 +71,7 @@ jobs:
       run: |
         if [ -n "$(git status --porcelain)" ]; then
           git config --global user.name "shukawam"
-          git config --global user.email "shukawam@+github@gmail.com"
+          git config --global user.email "shukawam+github@gmail.com"
           git pull origin main
           git add ./examples/*
           git add ./zips/*
