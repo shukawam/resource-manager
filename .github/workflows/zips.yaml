@@ -48,9 +48,9 @@ jobs:
             rm -r zips
         fi
         mkdir -p zips
-        printf '## Terraform Oracle Cloud Infrastructure Provider Examples \n###  Examples In This Directory \nThis directory contains Terraform configuration files showing how to create specific resources. The examples are intended to be as simple as possible, in most cases containing only the specific resource and any dependencies required for it to run. These do not represent production configurations or real world scenarios. The magic buttons of the examples can be found below.\n' > ./examples/${RESOURCE}/README.md
+        printf '# Terraform Oracle Cloud Infrastructure Provider Examples \n##  Examples In This Directory \nThis directory contains Terraform configuration files showing how to create specific resources. The examples are intended to be as simple as possible, in most cases containing only the specific resource and any dependencies required for it to run. These do not represent production configurations or real world scenarios. The magic buttons of the examples can be found below.\n' > ./examples/${RESOURCE}/README.md
         FOLDERS=$(ls -d examples/*/ | jq -R)
-        MAGIC_LINK="https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/raw/master/zips/"
+        MAGIC_LINK="https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/raw/main/zips/"
         for EXAMPLE_FOLDER in $FOLDERS;
         do
           RESOURCE=$(cut -d "/" -f 2 <<< "$EXAMPLE_FOLDER")
@@ -62,7 +62,6 @@ jobs:
             mv $FILEZIP ./zips
             cat ./examples/${RESOURCE}/$FILENAME > ./examples/${RESOURCE}/README.md
             printf '\n## Magic Button \n[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)]('${MAGIC_LINK}${FILEZIP}')' >>./examples/${RESOURCE}/README.md
-            printf '%s\n' '- '${RESOURCE}'  
             [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)]('${MAGIC_LINK}${FILEZIP}')' >> ./examples/README.md
           fi
         done
