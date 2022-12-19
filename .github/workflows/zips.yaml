@@ -35,7 +35,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git config --global user.name "shukawam"
             git config --global user.email "shukawam+github@gmail.com"
-            git pull origin main
+            git pull origin feature/oke-tutorial-cluster
             git add ./examples/*
             git commit -m "Added - Description files for service examples"
             git push
@@ -71,7 +71,7 @@ jobs:
         if [ -n "$(git status --porcelain)" ]; then
           git config --global user.name "shukawam"
           git config --global user.email "shukawam+github@gmail.com"
-          git pull origin main
+          git pull origin feature/oke-tutorial-cluster
           git add ./examples/*
           git add ./zips/*
           git commit -m "Added - README.md of service examples with magic button"
