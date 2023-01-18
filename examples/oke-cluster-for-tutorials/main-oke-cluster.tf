@@ -7,13 +7,13 @@ resource "oci_containerengine_cluster" "tutorial_cluster" {
 
   #Optional
   endpoint_config {
-    subnet_id            = oci_core_subnet.cluster_regional_subnet.id
+    subnet_id            = oci_core_subnet.k8s_api_endpoint_regional_subnet.id
     is_public_ip_enabled = "true"
     nsg_ids              = [oci_core_network_security_group.tutorial_nsg.id]
   }
 
   options {
-    service_lb_subnet_ids = [oci_core_subnet.clusterSubnet_1.id]
+    service_lb_subnet_ids = [oci_core_subnet.lb_regional_subnet.id]
 
     #Optional
     add_ons {
@@ -54,35 +54,13 @@ resource "oci_containerengine_node_pool" "tutorial_node_pool" {
     boot_volume_size_in_gbs = var.node_pool_boot_volume_size_in_gbs
   }
 
-  ssh_public_key = var.node_pool_ssh_public_key
-
   node_config_details {
     placement_configs {
       availability_domain = data.oci_identity_availability_domain.ad.name
-      subnet_id           = oci_core_subnet.node_pool_regional_subnet_2.id
+      subnet_id           = oci_core_subnet.node_pool_regional_subnet.id
     }
 
-    placement_configs {
-      availability_domain = data.oci_identity_availability_domain.ad.name
-      subnet_id           = oci_core_subnet.node_pool_regional_subnet_1.id
-    }
-
-    size = 4
+    size = 3
   }
 }
 
-output "cluster" {
-  value = {
-    id                 = oci_containerengine_cluster.tutorial_cluster.id
-    kubernetes_version = oci_containerengine_cluster.tutorial_cluster.kubernetes_version
-    name               = oci_containerengine_cluster.tutorial_cluster.name
-  }
-}
-
-output "node_pool" {
-  value = {
-    id                 = oci_containerengine_node_pool.tutorial_node_pool.id
-    kubernetes_version = oci_containerengine_node_pool.tutorial_node_pool.kubernetes_version
-    name               = oci_containerengine_node_pool.tutorial_node_pool.name
-  }
-}
