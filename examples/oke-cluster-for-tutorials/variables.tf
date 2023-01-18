@@ -15,7 +15,7 @@ variable "availability_domain_number" {
 }
 
 variable "cluster_name" {
-  default = "tfTestCluster"
+  default = "TutorialCluster"
 }
 
 variable "cluster_options_add_ons_is_kubernetes_dashboard_enabled" {
