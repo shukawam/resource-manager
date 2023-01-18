@@ -4,11 +4,11 @@ data "oci_identity_availability_domain" "ad" {
 }
 
 data "oci_containerengine_cluster_option" "cluster_option" {
-  cluster_option_id = "all"
+  cluster_option_id = oci_containerengine_cluster_option.cluster_option.id
 }
 
 data "oci_containerengine_node_pool_option" "tutorial_node_pool_option" {
-  node_pool_option_id = "all"
+  node_pool_option_id = oci_containerengine_cluster_option.tutorial_node_pool_option.id
 }
 
 data "oci_core_images" "shape_specific_images" {
