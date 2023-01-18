@@ -13,7 +13,7 @@ resource "oci_containerengine_cluster" "tutorial_cluster" {
   }
 
   options {
-    service_lb_subnet_ids = [oci_core_subnet.clusterSubnet_1.id, oci_core_subnet.clusterSubnet_2.id]
+    service_lb_subnet_ids = [oci_core_subnet.clusterSubnet_1.id]
 
     #Optional
     add_ons {
