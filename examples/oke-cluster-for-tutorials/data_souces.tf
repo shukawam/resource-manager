@@ -3,11 +3,11 @@ data "oci_identity_availability_domain" "ad" {
   ad_number      = var.availability_domain_number
 }
 
-data "oci_containerengine_cluster_option" "test_cluster_option" {
+data "oci_containerengine_cluster_option" "tutorial_cluster_option" {
   cluster_option_id = "all"
 }
 
-data "oci_containerengine_node_pool_option" "test_node_pool_option" {
+data "oci_containerengine_node_pool_option" "tutorial_node_pool_option" {
   node_pool_option_id = "all"
 }
 
