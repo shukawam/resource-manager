@@ -58,10 +58,6 @@ variable "node_pool_quantity_per_subnet" {
   default = 1
 }
 
-variable "node_pool_ssh_public_key" {
-  
-}
-
 variable "node_pool_boot_volume_size_in_gbs" {
   default = "50"
 }
