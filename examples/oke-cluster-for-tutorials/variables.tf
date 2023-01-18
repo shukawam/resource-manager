@@ -43,7 +43,7 @@ variable "node_pool_initial_node_labels_value" {
 }
 
 variable "node_pool_name" {
-  default = "tfPool"
+  default = "tutorialPool"
 }
 
 variable "node_pool_node_image_name" {
