@@ -1,17 +1,24 @@
+variable "compartment_id" {
+  description = "compartment ocid"
+}
+variable "region" {
+  description = "oci region(e.g. ap-tokyo-1, etc.)"
+}
+
 variable "cluster_name" {
   default = "tfTestCluster"
 }
 
 variable "availability_domain" {
-  default = 3
+  default = 1
 }
 
 variable "cluster_options_add_ons_is_kubernetes_dashboard_enabled" {
-  default = true
+  default = false
 }
 
 variable "cluster_options_add_ons_is_tiller_enabled" {
-  default = true
+  default = false
 }
 
 variable "cluster_options_kubernetes_network_config_pods_cidr" {
@@ -23,11 +30,9 @@ variable "cluster_options_kubernetes_network_config_services_cidr" {
 }
 
 variable "node_pool_initial_node_labels_key" {
-  default = "key"
 }
 
 variable "node_pool_initial_node_labels_value" {
-  default = "value"
 }
 
 variable "node_pool_name" {
@@ -35,7 +40,7 @@ variable "node_pool_name" {
 }
 
 variable "node_pool_node_image_name" {
-  default = "Oracle-Linux-7.6"
+  default = "Oracle-Linux-7.9"
 }
 
 variable "node_pool_node_shape" {
@@ -43,7 +48,7 @@ variable "node_pool_node_shape" {
 }
 
 variable "node_pool_quantity_per_subnet" {
-  default = 2
+  default = 1
 }
 
 variable "node_pool_ssh_public_key" {
@@ -51,5 +56,5 @@ variable "node_pool_ssh_public_key" {
 }
 
 variable "node_pool_boot_volume_size_in_gbs" {
-  default = "60"
+  default = "50"
 }
