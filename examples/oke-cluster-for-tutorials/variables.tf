@@ -5,12 +5,17 @@ variable "region" {
   description = "oci region(e.g. ap-tokyo-1, etc.)"
 }
 
-variable "cluster_name" {
-  default = "tfTestCluster"
+variable "availability_domain_name" {
+  default     = ""
+  description = "Availability Domain name, if non-empty takes precedence over availability_domain_number"
 }
 
-variable "availability_domain" {
+variable "availability_domain_number" {
   default = 1
+}
+
+variable "cluster_name" {
+  default = "tfTestCluster"
 }
 
 variable "cluster_options_add_ons_is_kubernetes_dashboard_enabled" {

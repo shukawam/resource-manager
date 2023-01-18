@@ -3,7 +3,7 @@ resource "oci_containerengine_cluster" "test_cluster" {
   compartment_id     = var.compartment_id
   kubernetes_version = data.oci_containerengine_cluster_option.test_cluster_option.kubernetes_versions[0]
   name               = var.cluster_name
-  vcn_id             = oci_core_vcn.test_vcn.id
+  vcn_id             = oci_core_vcn.tutorial_vcn.id
 
   #Optional
   endpoint_config {
