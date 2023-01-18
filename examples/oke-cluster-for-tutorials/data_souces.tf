@@ -1,11 +1,6 @@
-data "oci_identity_availability_domain" "ad1" {
-  compartment_id = var.tenancy_ocid
+data "oci_identity_availability_domain" "ad" {
+  compartment_id = var.compartment_id
   ad_number      = 1
-}
-
-data "oci_identity_availability_domain" "ad2" {
-  compartment_id = var.tenancy_ocid
-  ad_number      = 2
 }
 
 data "oci_containerengine_cluster_option" "test_cluster_option" {
@@ -18,7 +13,7 @@ data "oci_containerengine_node_pool_option" "test_node_pool_option" {
 
 data "oci_core_images" "shape_specific_images" {
   #Required
-  compartment_id = var.tenancy_ocid
+  compartment_id = var.compartment_id
   shape          = "VM.Standard2.1"
 }
 
