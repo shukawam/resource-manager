@@ -1,6 +1,6 @@
 resource "oci_containerengine_cluster" "test_cluster" {
   #Required
-  compartment_id     = var.compartment_ocid
+  compartment_id     = var.compartment_id
   kubernetes_version = data.oci_containerengine_cluster_option.test_cluster_option.kubernetes_versions[0]
   name               = var.cluster_name
   vcn_id             = oci_core_vcn.test_vcn.id
@@ -33,7 +33,7 @@ resource "oci_containerengine_cluster" "test_cluster" {
 resource "oci_containerengine_node_pool" "test_node_pool" {
   #Required
   cluster_id         = oci_containerengine_cluster.test_cluster.id
-  compartment_id     = var.compartment_ocid
+  compartment_id     = var.compartment_id
   kubernetes_version = data.oci_containerengine_node_pool_option.test_node_pool_option.kubernetes_versions[0]
   name               = var.node_pool_name
   node_shape         = var.node_pool_node_shape
