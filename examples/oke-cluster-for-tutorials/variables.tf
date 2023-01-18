@@ -19,7 +19,7 @@ variable "cluster_name" {
 }
 
 variable "kubernetes_version" {
-  default = "v1.24.1"
+  default = "v1.25.4"
 }
 
 variable "cluster_options_add_ons_is_kubernetes_dashboard_enabled" {
