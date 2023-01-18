@@ -49,7 +49,6 @@ resource "oci_containerengine_node_pool" "tutorial_node_pool" {
     #Required
     image_id    = local.oracle_linux_images.0
     source_type = "IMAGE"
-
     #Optional
     boot_volume_size_in_gbs = var.node_pool_boot_volume_size_in_gbs
   }
@@ -59,7 +58,6 @@ resource "oci_containerengine_node_pool" "tutorial_node_pool" {
       availability_domain = data.oci_identity_availability_domain.ad.name
       subnet_id           = oci_core_subnet.node_pool_regional_subnet.id
     }
-
     size = 3
   }
 }
