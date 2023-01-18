@@ -1,7 +1,7 @@
 resource "oci_containerengine_cluster" "tutorial_cluster" {
   #Required
   compartment_id     = var.compartment_id
-  kubernetes_version = data.oci_containerengine_cluster_option.tutorial_cluster_option.kubernetes_versions[0]
+  kubernetes_version = data.oci_containerengine_cluster_option.cluster_option.kubernetes_versions[0]
   name               = var.cluster_name
   vcn_id             = oci_core_vcn.tutorial_vcn.id
 
