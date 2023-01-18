@@ -35,11 +35,11 @@ variable "cluster_options_kubernetes_network_config_services_cidr" {
 }
 
 variable "node_pool_initial_node_labels_key" {
-  default = "managedByResourceManager"
+  default = "managedBy"
 }
 
 variable "node_pool_initial_node_labels_value" {
-  default = true
+  default = "ResourceManager"
 }
 
 variable "node_pool_name" {
