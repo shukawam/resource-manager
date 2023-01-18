@@ -47,10 +47,10 @@ resource "oci_core_subnet" "node_pool_regional_subnet" {
   vcn_id         = oci_core_vcn.tutorial_vcn.id
 
   # Provider code tries to maintain compatibility with old versions.
-  security_list_ids      = [oci_core_vcn.tutorial_vcn.default_security_list_id]
-  display_name           = "oke-node-subnet"
-  route_table_id         = oci_core_route_table.tutorial_route_table.id
-  prohibitPublicIpOnVnic = true
+  security_list_ids          = [oci_core_vcn.tutorial_vcn.default_security_list_id]
+  display_name               = "oke-node-subnet"
+  route_table_id             = oci_core_route_table.tutorial_route_table.id
+  prohibit_public_ip_on_vnic = var.subnet_prohibit_public_ip_on_vnic
 }
 
 resource "oci_core_subnet" "lb_regional_subnet" {

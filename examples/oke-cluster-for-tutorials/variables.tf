@@ -61,3 +61,8 @@ variable "node_pool_quantity_per_subnet" {
 variable "node_pool_boot_volume_size_in_gbs" {
   default = "50"
 }
+
+
+variable "subnet_prohibit_public_ip_on_vnic" {
+  default = "true"
+}
