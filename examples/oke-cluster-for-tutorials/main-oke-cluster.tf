@@ -34,7 +34,7 @@ resource "oci_containerengine_node_pool" "tutorial_node_pool" {
   #Required
   cluster_id         = oci_containerengine_cluster.tutorial_cluster.id
   compartment_id     = var.compartment_id
-  kubernetes_version = data.oci_containerengine_node_pool_option.tutorial_node_pool_option.kubernetes_versions[0]
+  kubernetes_version = var.kubernetes_version
   name               = var.node_pool_name
   node_shape         = var.node_pool_node_shape
 
