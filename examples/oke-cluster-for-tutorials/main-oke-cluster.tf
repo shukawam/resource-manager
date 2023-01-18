@@ -1,7 +1,7 @@
-resource "oci_containerengine_cluster" "test_cluster" {
+resource "oci_containerengine_cluster" "tutorial_cluster" {
   #Required
   compartment_id     = var.compartment_id
-  kubernetes_version = data.oci_containerengine_cluster_option.test_cluster_option.kubernetes_versions[0]
+  kubernetes_version = data.oci_containerengine_cluster_option.tutorial_cluster_option.kubernetes_versions[0]
   name               = var.cluster_name
   vcn_id             = oci_core_vcn.tutorial_vcn.id
 
@@ -9,7 +9,7 @@ resource "oci_containerengine_cluster" "test_cluster" {
   endpoint_config {
     subnet_id            = oci_core_subnet.cluster_regional_subnet.id
     is_public_ip_enabled = "true"
-    nsg_ids              = [oci_core_network_security_group.test_nsg.id]
+    nsg_ids              = [oci_core_network_security_group.tutorial_nsg.id]
   }
 
   options {
@@ -30,11 +30,11 @@ resource "oci_containerengine_cluster" "test_cluster" {
   }
 }
 
-resource "oci_containerengine_node_pool" "test_node_pool" {
+resource "oci_containerengine_node_pool" "tutorial_node_pool" {
   #Required
-  cluster_id         = oci_containerengine_cluster.test_cluster.id
+  cluster_id         = oci_containerengine_cluster.tutorial_cluster.id
   compartment_id     = var.compartment_id
-  kubernetes_version = data.oci_containerengine_node_pool_option.test_node_pool_option.kubernetes_versions[0]
+  kubernetes_version = data.oci_containerengine_node_pool_option.tutorial_node_pool_option.kubernetes_versions[0]
   name               = var.node_pool_name
   node_shape         = var.node_pool_node_shape
 
@@ -73,16 +73,16 @@ resource "oci_containerengine_node_pool" "test_node_pool" {
 
 output "cluster" {
   value = {
-    id                 = oci_containerengine_cluster.test_cluster.id
-    kubernetes_version = oci_containerengine_cluster.test_cluster.kubernetes_version
-    name               = oci_containerengine_cluster.test_cluster.name
+    id                 = oci_containerengine_cluster.tutorial_cluster.id
+    kubernetes_version = oci_containerengine_cluster.tutorial_cluster.kubernetes_version
+    name               = oci_containerengine_cluster.tutorial_cluster.name
   }
 }
 
 output "node_pool" {
   value = {
-    id                 = oci_containerengine_node_pool.test_node_pool.id
-    kubernetes_version = oci_containerengine_node_pool.test_node_pool.kubernetes_version
-    name               = oci_containerengine_node_pool.test_node_pool.name
+    id                 = oci_containerengine_node_pool.tutorial_node_pool.id
+    kubernetes_version = oci_containerengine_node_pool.tutorial_node_pool.kubernetes_version
+    name               = oci_containerengine_node_pool.tutorial_node_pool.name
   }
 }

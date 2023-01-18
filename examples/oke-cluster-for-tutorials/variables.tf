@@ -35,9 +35,11 @@ variable "cluster_options_kubernetes_network_config_services_cidr" {
 }
 
 variable "node_pool_initial_node_labels_key" {
+  default = "managedByResourceManager"
 }
 
 variable "node_pool_initial_node_labels_value" {
+  default = true
 }
 
 variable "node_pool_name" {
@@ -57,7 +59,7 @@ variable "node_pool_quantity_per_subnet" {
 }
 
 variable "node_pool_ssh_public_key" {
-
+  
 }
 
 variable "node_pool_boot_volume_size_in_gbs" {
