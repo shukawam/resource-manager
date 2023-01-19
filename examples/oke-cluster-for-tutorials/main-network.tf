@@ -1,7 +1,7 @@
 resource "oci_core_vcn" "tutorial_vcn" {
   cidr_block     = "10.0.0.0/16"
   compartment_id = var.compartment_id
-  display_name   = "tfVcnForClusters"
+  display_name   = "TutorialVcn"
 }
 
 resource "oci_core_network_security_group" "tutorial_nsg" {
@@ -19,7 +19,7 @@ resource "oci_core_internet_gateway" "tutorial_igw" {
 resource "oci_core_route_table" "tutorial_route_table" {
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.tutorial_vcn.id
-  display_name   = "tfClustersRouteTable"
+  display_name   = "TutorialRouteTable"
 
   route_rules {
     destination       = "0.0.0.0/0"
