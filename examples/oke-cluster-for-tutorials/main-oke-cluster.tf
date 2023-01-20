@@ -53,6 +53,8 @@ resource "oci_containerengine_node_pool" "tutorial_node_pool" {
     boot_volume_size_in_gbs = var.node_pool_boot_volume_size_in_gbs
   }
 
+  node_image_name = "oke-tutorial-nodes"
+
   node_config_details {
     placement_configs {
       availability_domain = data.oci_identity_availability_domain.ad.name
