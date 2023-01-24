@@ -57,7 +57,7 @@ resource "oci_core_route_table" "tutorial_private_route_table" {
   route_rules {
     destination       = var.services_network
     destination_type  = "SERVICE_CIDR_BLOCK"
-    network_entity_id = oci_core_nat_gateway.tutorial_svcgw.id
+    network_entity_id = oci_core_service_gateway.tutorial_svcgw.id
   }
 
   route_rules {
