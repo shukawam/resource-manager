@@ -14,6 +14,11 @@ variable "availability_domain_number" {
   default = 1
 }
 
+variable "services_network" {
+  default = "all-nrt-services-in-oracle-services-network"
+}
+
+
 variable "cluster_name" {
   default = "TutorialCluster"
 }
