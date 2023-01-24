@@ -261,7 +261,7 @@ resource "oci_core_security_list" "node_pool_security_list" {
     #Required
     destination = "10.0.10.0/24"
     description = "Allow pods on one worker node to communicate with pods on other worker nodes"
-    port        = "all"
+    protocol    = "all"
   }
 
   egress_security_rules {
