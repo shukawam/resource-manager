@@ -48,13 +48,13 @@ resource "oci_core_route_table" "tutorial_private_route_table" {
   route_rules {
     destination       = var.services_network
     destination_type  = "SERVICE_CIDR_BLOCK"
-    network_entity_id = oci_core_internet_gateway.tutorial_ngw.id
+    network_entity_id = oci_core_nat_gateway.tutorial_ngw.id
   }
 
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_internet_gateway.tutorial_ngw.id
+    network_entity_id = oci_core_nat_gateway.tutorial_ngw.id
   }
 }
 
@@ -70,11 +70,9 @@ resource "oci_core_security_list" "k8s_api_endpoint_security_list" {
     source   = "0.0.0.0/0"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "6443"
-        min = "6443"
-      }
+      #Required
+      max = "6443"
+      min = "6443"
     }
   }
 
@@ -83,11 +81,9 @@ resource "oci_core_security_list" "k8s_api_endpoint_security_list" {
     source   = "10.0.10.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "6443"
-        min = "6443"
-      }
+      #Required
+      max = "6443"
+      min = "6443"
     }
   }
 
@@ -96,11 +92,9 @@ resource "oci_core_security_list" "k8s_api_endpoint_security_list" {
     source   = "10.0.10.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "12250"
-        min = "12250"
-      }
+      #Required
+      max = "12250"
+      min = "12250"
     }
   }
 
@@ -119,10 +113,8 @@ resource "oci_core_security_list" "k8s_api_endpoint_security_list" {
     description = "Allow Kubernetes Control Plane to communicate with OKE"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "6443"
-        min = "6443"
-      }
+      max = "6443"
+      min = "6443"
     }
   }
   egress_security_rules {
@@ -171,11 +163,9 @@ resource "oci_core_security_list" "node_pool_security_list" {
     source   = "0.0.0.0/0"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "22"
-        min = "22"
-      }
+      #Required
+      max = "22"
+      min = "22"
     }
   }
 
@@ -184,11 +174,9 @@ resource "oci_core_security_list" "node_pool_security_list" {
     source   = "10.0.20.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "30805"
-        min = "30805"
-      }
+      #Required
+      max = "30805"
+      min = "30805"
     }
   }
 
@@ -197,11 +185,9 @@ resource "oci_core_security_list" "node_pool_security_list" {
     source   = "10.0.20.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "10256"
-        min = "10256"
-      }
+      #Required
+      max = "10256"
+      min = "10256"
     }
   }
 
@@ -210,11 +196,9 @@ resource "oci_core_security_list" "node_pool_security_list" {
     source   = "10.0.20.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "31346"
-        min = "31346"
-      }
+      #Required
+      max = "31346"
+      min = "31346"
     }
   }
 
@@ -223,11 +207,9 @@ resource "oci_core_security_list" "node_pool_security_list" {
     source   = "10.0.20.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "31078"
-        min = "31078"
-      }
+      #Required
+      max = "31078"
+      min = "31078"
     }
   }
 
@@ -236,11 +218,9 @@ resource "oci_core_security_list" "node_pool_security_list" {
     source   = "10.0.20.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "32734"
-        min = "32734"
-      }
+      #Required
+      max = "32734"
+      min = "32734"
     }
   }
 
@@ -249,11 +229,9 @@ resource "oci_core_security_list" "node_pool_security_list" {
     source   = "10.0.20.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "30656"
-        min = "30656"
-      }
+      #Required
+      max = "30656"
+      min = "30656"
     }
   }
 
@@ -262,11 +240,9 @@ resource "oci_core_security_list" "node_pool_security_list" {
     source   = "10.0.20.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "31480"
-        min = "31480"
-      }
+      #Required
+      max = "31480"
+      min = "31480"
     }
   }
 
@@ -275,11 +251,9 @@ resource "oci_core_security_list" "node_pool_security_list" {
     source   = "10.0.20.0/24"
 
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "30572"
-        min = "30572"
-      }
+      #Required
+      max = "30572"
+      min = "30572"
     }
   }
 
@@ -295,10 +269,8 @@ resource "oci_core_security_list" "node_pool_security_list" {
     description = "Access to Kubernetes API Endpoint"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "6443"
-        min = "6443"
-      }
+      max = "6443"
+      min = "6443"
     }
   }
 
@@ -308,10 +280,8 @@ resource "oci_core_security_list" "node_pool_security_list" {
     description = "Kubernetes worker to control plane communication"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "12250"
-        min = "12250"
-      }
+      max = "12250"
+      min = "12250"
     }
   }
 
@@ -332,10 +302,8 @@ resource "oci_core_security_list" "node_pool_security_list" {
     description = "	Allow nodes to communicate with OKE to ensure correct start-up and continued functioning"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "443"
-        min = "443"
-      }
+      max = "443"
+      min = "443"
     }
   }
   egress_security_rules {
@@ -356,11 +324,9 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "443"
-        min = "443"
-      }
+      #Required
+      max = "443"
+      min = "443"
     }
   }
 
@@ -368,11 +334,9 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "80"
-        min = "80"
-      }
+      #Required
+      max = "80"
+      min = "80"
     }
   }
 
@@ -380,11 +344,9 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "15021"
-        min = "15021"
-      }
+      #Required
+      max = "15021"
+      min = "15021"
     }
   }
 
@@ -392,11 +354,9 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "31400"
-        min = "31400"
-      }
+      #Required
+      max = "31400"
+      min = "31400"
     }
   }
 
@@ -404,11 +364,9 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      destination_port_range {
-        #Required
-        max = "15443"
-        min = "15443"
-      }
+      #Required
+      max = "15443"
+      min = "15443"
     }
   }
 
@@ -417,10 +375,8 @@ resource "oci_core_security_list" "lb_security_list" {
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "10256"
-        min = "10256"
-      }
+      max = "10256"
+      min = "10256"
     }
   }
 
@@ -429,10 +385,8 @@ resource "oci_core_security_list" "lb_security_list" {
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "31078"
-        min = "31078"
-      }
+      max = "31078"
+      min = "31078"
     }
   }
 
@@ -441,10 +395,8 @@ resource "oci_core_security_list" "lb_security_list" {
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "32734"
-        min = "32734"
-      }
+      max = "32734"
+      min = "32734"
     }
   }
   egress_security_rules {
@@ -452,10 +404,8 @@ resource "oci_core_security_list" "lb_security_list" {
     destination = "10.0.0.16/16"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "10256"
-        min = "10256"
-      }
+      max = "10256"
+      min = "10256"
     }
   }
 
@@ -464,10 +414,8 @@ resource "oci_core_security_list" "lb_security_list" {
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "31346"
-        min = "31346"
-      }
+      max = "31346"
+      min = "31346"
     }
   }
   egress_security_rules {
@@ -475,10 +423,8 @@ resource "oci_core_security_list" "lb_security_list" {
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
-      destination_port_range {
-        max = "30805"
-        min = "30805"
-      }
+      max = "30805"
+      min = "30805"
     }
   }
 }
