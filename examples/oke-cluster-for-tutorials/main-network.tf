@@ -26,6 +26,15 @@ resource "oci_core_nat_gateway" "tutorial_ngw" {
   vcn_id         = oci_core_vcn.tutorial_vcn.id
 }
 
+resource "oci_core_service_gateway" "tutorial_svcgw" {
+    compartment_id = var.compartment_id
+    services {
+        service_id = data.oci_core_services.tutorial_services.services.0.id
+    }
+    vcn_id = oci_core_vcn.tutorial_vcn.id
+    display_name = "Tutorial Service Gateway"
+}
+
 ### Route Tables
 
 resource "oci_core_route_table" "tutorial_public_route_table" {
@@ -48,12 +57,12 @@ resource "oci_core_route_table" "tutorial_private_route_table" {
   route_rules {
     destination       = var.services_network
     destination_type  = "SERVICE_CIDR_BLOCK"
-    network_entity_id = oci_core_nat_gateway.tutorial_ngw.id
+    network_entity_id = oci_core_nat_gateway.tutorial_svcgw.id
   }
 
   route_rules {
     destination       = "0.0.0.0/0"
-    destination_type  = "CIDR_BLOCK"
+    destination_type  = "SERVICE_CIDR_BLOCK"
     network_entity_id = oci_core_nat_gateway.tutorial_ngw.id
   }
 }
@@ -311,7 +320,7 @@ resource "oci_core_security_list" "node_pool_security_list" {
     #Required
     destination = "0.0.0.0/0"
     description = "Worker Nodes access to Internet"
-    protocol    = "6" # ICMP
+    protocol    = "6" # TCP
   }
 
 }
@@ -402,7 +411,7 @@ resource "oci_core_security_list" "lb_security_list" {
   }
   egress_security_rules {
     #Required
-    destination = "10.0.0.16/16"
+    destination = "10.0.0.0/16"
     protocol    = "6" # TCP
     tcp_options {
       max = "10256"
