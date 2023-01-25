@@ -32,7 +32,7 @@ resource "oci_core_default_route_table" "tutorial_public_route_table" {
   manage_default_resource_id = oci_core_vcn.tutorial_vcn.default_route_table_id
   compartment_id             = var.compartment_id
   # vcn_id                     = oci_core_vcn.tutorial_vcn.id
-  display_name               = "Tutorial Public Route Table"
+  display_name = "Tutorial Public Route Table"
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
@@ -422,7 +422,6 @@ resource "oci_core_security_list" "lb_security_list" {
 }
 
 ### Subnets
-
 resource "oci_core_subnet" "k8s_api_endpoint_regional_subnet" {
   cidr_block        = "10.0.0.0/28"
   compartment_id    = var.compartment_id
@@ -449,4 +448,10 @@ resource "oci_core_subnet" "lb_regional_subnet" {
   security_list_ids = [oci_core_security_list.lb_security_list.id]
   display_name      = "oke-svclb-subnet"
   route_table_id    = oci_core_vcn.tutorial_vcn.default_route_table_id
+}
+
+### Route Table Attachment
+resource "oci_core_route_table_attachment" "tutorial_private_route_table_attachment" {
+  subnet_id      = oci_core_subnet.node_pool_regional_subnet.id
+  route_table_id = oci_core_route_table.tutorial_private_route_table.id
 }
