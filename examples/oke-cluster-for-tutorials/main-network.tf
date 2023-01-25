@@ -28,10 +28,10 @@ resource "oci_core_service_gateway" "tutorial_svcgw" {
 }
 
 ### Route Tables
-resource "oci_core_route_table" "tutorial_public_route_table" {
+resource "oci_core_default_route_table" "tutorial_public_route_table" {
   manage_default_resource_id = oci_core_vcn.tutorial_vcn.default_route_table_id
   compartment_id             = var.compartment_id
-  vcn_id                     = oci_core_vcn.tutorial_vcn.id
+  # vcn_id                     = oci_core_vcn.tutorial_vcn.id
   display_name               = "Tutorial Public Route Table"
   route_rules {
     destination       = "0.0.0.0/0"
