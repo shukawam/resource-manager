@@ -27,12 +27,12 @@ resource "oci_core_nat_gateway" "tutorial_ngw" {
 }
 
 resource "oci_core_service_gateway" "tutorial_svcgw" {
-    compartment_id = var.compartment_id
-    services {
-        service_id = data.oci_core_services.tutorial_services.services.0.id
-    }
-    vcn_id = oci_core_vcn.tutorial_vcn.id
-    display_name = "Tutorial Service Gateway"
+  compartment_id = var.compartment_id
+  services {
+    service_id = data.oci_core_services.tutorial_services.services.0.id
+  }
+  vcn_id       = oci_core_vcn.tutorial_vcn.id
+  display_name = "Tutorial Service Gateway"
 }
 
 ### Route Tables
@@ -41,7 +41,6 @@ resource "oci_core_route_table" "tutorial_public_route_table" {
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.tutorial_vcn.id
   display_name   = "Tutorial Public Route Table"
-
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
@@ -53,7 +52,6 @@ resource "oci_core_route_table" "tutorial_private_route_table" {
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.tutorial_vcn.id
   display_name   = "TutorialRouteTable"
-
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
@@ -72,13 +70,10 @@ resource "oci_core_security_list" "k8s_api_endpoint_security_list" {
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.tutorial_vcn.id
   display_name   = "K8s Endpoint Security List"
-
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
-
     tcp_options {
-      #Required
       max = "6443"
       min = "6443"
     }
@@ -87,9 +82,8 @@ resource "oci_core_security_list" "k8s_api_endpoint_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.10.0/24"
-
     tcp_options {
-      #Required
+
       max = "6443"
       min = "6443"
     }
@@ -98,9 +92,8 @@ resource "oci_core_security_list" "k8s_api_endpoint_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.10.0/24"
-
     tcp_options {
-      #Required
+
       max = "12250"
       min = "12250"
     }
@@ -116,10 +109,11 @@ resource "oci_core_security_list" "k8s_api_endpoint_security_list" {
   }
 
   egress_security_rules {
-    #Required
-    destination = var.services_network
-    description = "Allow Kubernetes Control Plane to communicate with OKE"
-    protocol    = "6" # TCP
+
+    destination      = var.services_network
+    description      = "Allow Kubernetes Control Plane to communicate with OKE"
+    protocol         = "6" # TCP
+    destination_type = "SERVICE_CIDR_BLOCK"
     tcp_options {
       max = "6443"
       min = "6443"
@@ -146,7 +140,6 @@ resource "oci_core_security_list" "node_pool_security_list" {
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.tutorial_vcn.id
   display_name   = "Node Pool Security List"
-
   ingress_security_rules {
     protocol = "all"
     source   = "10.0.10.0/24"
@@ -169,9 +162,7 @@ resource "oci_core_security_list" "node_pool_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
-
     tcp_options {
-      #Required
       max = "22"
       min = "22"
     }
@@ -180,9 +171,7 @@ resource "oci_core_security_list" "node_pool_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.20.0/24"
-
     tcp_options {
-      #Required
       max = "30805"
       min = "30805"
     }
@@ -191,9 +180,7 @@ resource "oci_core_security_list" "node_pool_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.20.0/24"
-
     tcp_options {
-      #Required
       max = "10256"
       min = "10256"
     }
@@ -202,9 +189,7 @@ resource "oci_core_security_list" "node_pool_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.20.0/24"
-
     tcp_options {
-      #Required
       max = "31346"
       min = "31346"
     }
@@ -213,20 +198,15 @@ resource "oci_core_security_list" "node_pool_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.20.0/24"
-
     tcp_options {
-      #Required
       max = "31078"
       min = "31078"
     }
   }
-
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.20.0/24"
-
     tcp_options {
-      #Required
       max = "32734"
       min = "32734"
     }
@@ -235,9 +215,7 @@ resource "oci_core_security_list" "node_pool_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.20.0/24"
-
     tcp_options {
-      #Required
       max = "30656"
       min = "30656"
     }
@@ -246,9 +224,7 @@ resource "oci_core_security_list" "node_pool_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.20.0/24"
-
     tcp_options {
-      #Required
       max = "31480"
       min = "31480"
     }
@@ -257,23 +233,19 @@ resource "oci_core_security_list" "node_pool_security_list" {
   ingress_security_rules {
     protocol = "6" # TCP
     source   = "10.0.20.0/24"
-
     tcp_options {
-      #Required
       max = "30572"
       min = "30572"
     }
   }
 
   egress_security_rules {
-    #Required
     destination = "10.0.10.0/24"
     description = "Allow pods on one worker node to communicate with pods on other worker nodes"
     protocol    = "all"
   }
 
   egress_security_rules {
-    #Required
     destination = "10.0.0.0/28"
     description = "Access to Kubernetes API Endpoint"
     protocol    = "6" # TCP
@@ -284,7 +256,6 @@ resource "oci_core_security_list" "node_pool_security_list" {
   }
 
   egress_security_rules {
-    #Required
     destination = "10.0.0.0/28"
     description = "Kubernetes worker to control plane communication"
     protocol    = "6" # TCP
@@ -295,7 +266,6 @@ resource "oci_core_security_list" "node_pool_security_list" {
   }
 
   egress_security_rules {
-    #Required
     destination = "10.0.0.0/28"
     description = "Path discovery"
     protocol    = "1" # ICMP
@@ -306,17 +276,16 @@ resource "oci_core_security_list" "node_pool_security_list" {
   }
 
   egress_security_rules {
-    #Required
-    destination = var.services_network
-    description = "	Allow nodes to communicate with OKE to ensure correct start-up and continued functioning"
-    protocol    = "6" # TCP
+    destination      = var.services_network
+    description      = "	Allow nodes to communicate with OKE to ensure correct start-up and continued functioning"
+    protocol         = "6" # TCP
+    destination_type = "SERVICE_CIDR_BLOCK"
     tcp_options {
       max = "443"
       min = "443"
     }
   }
   egress_security_rules {
-    #Required
     destination = "0.0.0.0/0"
     description = "Worker Nodes access to Internet"
     protocol    = "6" # TCP
@@ -333,7 +302,6 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      #Required
       max = "443"
       min = "443"
     }
@@ -343,7 +311,6 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      #Required
       max = "80"
       min = "80"
     }
@@ -353,7 +320,6 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      #Required
       max = "15021"
       min = "15021"
     }
@@ -363,7 +329,6 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      #Required
       max = "31400"
       min = "31400"
     }
@@ -373,14 +338,12 @@ resource "oci_core_security_list" "lb_security_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      #Required
       max = "15443"
       min = "15443"
     }
   }
 
   egress_security_rules {
-    #Required
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
@@ -390,7 +353,6 @@ resource "oci_core_security_list" "lb_security_list" {
   }
 
   egress_security_rules {
-    #Required
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
@@ -400,7 +362,6 @@ resource "oci_core_security_list" "lb_security_list" {
   }
 
   egress_security_rules {
-    #Required
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
@@ -409,7 +370,6 @@ resource "oci_core_security_list" "lb_security_list" {
     }
   }
   egress_security_rules {
-    #Required
     destination = "10.0.0.0/16"
     protocol    = "6" # TCP
     tcp_options {
@@ -419,7 +379,6 @@ resource "oci_core_security_list" "lb_security_list" {
   }
 
   egress_security_rules {
-    #Required
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
@@ -428,7 +387,6 @@ resource "oci_core_security_list" "lb_security_list" {
     }
   }
   egress_security_rules {
-    #Required
     destination = "10.0.10.0/24"
     protocol    = "6" # TCP
     tcp_options {
@@ -441,24 +399,18 @@ resource "oci_core_security_list" "lb_security_list" {
 ### Subnets
 
 resource "oci_core_subnet" "k8s_api_endpoint_regional_subnet" {
-  #Required
   cidr_block     = "10.0.0.0/28"
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.tutorial_vcn.id
-
-  # Provider code tries to maintain compatibility with old versions.
   security_list_ids = [oci_core_security_list.k8s_api_endpoint_security_list.id]
   display_name      = "oke-k8sApiEndpoint-subnet"
   route_table_id    = oci_core_route_table.tutorial_public_route_table.id
 }
 
 resource "oci_core_subnet" "node_pool_regional_subnet" {
-  #Required
   cidr_block     = "10.0.10.0/24"
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.tutorial_vcn.id
-
-  # Provider code tries to maintain compatibility with old versions.
   security_list_ids          = [oci_core_security_list.node_pool_security_list.id]
   display_name               = "oke-node-subnet"
   route_table_id             = oci_core_route_table.tutorial_public_route_table.id
@@ -466,12 +418,9 @@ resource "oci_core_subnet" "node_pool_regional_subnet" {
 }
 
 resource "oci_core_subnet" "lb_regional_subnet" {
-  #Required
   cidr_block     = "10.0.20.0/24"
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.tutorial_vcn.id
-
-  # Provider code tries to maintain compatibility with old versions.
   security_list_ids = [oci_core_security_list.lb_security_list.id]
   display_name      = "oke-svclb-subnet"
   route_table_id    = oci_core_route_table.tutorial_public_route_table.id
