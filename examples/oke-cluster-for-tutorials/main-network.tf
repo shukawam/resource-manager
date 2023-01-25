@@ -5,15 +5,7 @@ resource "oci_core_vcn" "tutorial_vcn" {
   display_name   = "TutorialVcn"
 }
 
-### Network Security Groups
-resource "oci_core_network_security_group" "tutorial_nsg" {
-  compartment_id = var.compartment_id
-  display_name   = "NSG for OKE Tutorial"
-  vcn_id         = oci_core_vcn.tutorial_vcn.id
-}
-
 ### Gateways
-
 resource "oci_core_internet_gateway" "tutorial_igw" {
   compartment_id = var.compartment_id
   display_name   = "Internet Gateway for OKE Tutorial"
@@ -51,7 +43,7 @@ resource "oci_core_route_table" "tutorial_public_route_table" {
 resource "oci_core_route_table" "tutorial_private_route_table" {
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.tutorial_vcn.id
-  display_name   = "TutorialRouteTable"
+  display_name   = "Tutorial Private Route Table"
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
@@ -115,8 +107,8 @@ resource "oci_core_security_list" "k8s_api_endpoint_security_list" {
     protocol         = "6" # TCP
     destination_type = "SERVICE_CIDR_BLOCK"
     tcp_options {
-      max = "6443"
-      min = "6443"
+      max = "443"
+      min = "443"
     }
   }
   egress_security_rules {
@@ -276,8 +268,18 @@ resource "oci_core_security_list" "node_pool_security_list" {
   }
 
   egress_security_rules {
+    destination = "0.0.0.0/0"
+    description = "ICMP Access from Kubernetes Control Plane"
+    protocol    = "1" # ICMP
+    icmp_options {
+      type = "3"
+      code = "4"
+    }
+  }
+
+  egress_security_rules {
     destination      = var.services_network
-    description      = "	Allow nodes to communicate with OKE to ensure correct start-up and continued functioning"
+    description      = "Allow nodes to communicate with OKE to ensure correct start-up and continued functioning"
     protocol         = "6" # TCP
     destination_type = "SERVICE_CIDR_BLOCK"
     tcp_options {
@@ -392,6 +394,30 @@ resource "oci_core_security_list" "lb_security_list" {
     tcp_options {
       max = "30805"
       min = "30805"
+    }
+  }
+  egress_security_rules {
+    destination = "10.0.10.0/24"
+    protocol    = "6" # TCP
+    tcp_options {
+      max = "30656"
+      min = "30656"
+    }
+  }
+  egress_security_rules {
+    destination = "10.0.10.0/24"
+    protocol    = "6" # TCP
+    tcp_options {
+      max = "31480"
+      min = "31480"
+    }
+  }
+  egress_security_rules {
+    destination = "10.0.10.0/24"
+    protocol    = "6" # TCP
+    tcp_options {
+      max = "30572"
+      min = "30572"
     }
   }
 }
