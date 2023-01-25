@@ -35,7 +35,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git config --global user.name "shukawam"
             git config --global user.email "shukawam+github@gmail.com"
-            git pull origin feature/oke-tutorial-cluster
+            git pull origin main
             git add ./examples/*
             git commit -m "Added - Description files for service examples"
             git push
@@ -51,7 +51,7 @@ jobs:
         mkdir -p zips
         printf '# Terraform Oracle Cloud Infrastructure Provider Examples \n##  Examples In This Directory \nThis directory contains Terraform configuration files showing how to create specific resources. The examples are intended to be as simple as possible, in most cases containing only the specific resource and any dependencies required for it to run. These do not represent production configurations or real world scenarios. The magic buttons of the examples can be found below.\n' > ./examples/${RESOURCE}/README.md
         FOLDERS=$(ls -d examples/*/ | jq -R)
-        MAGIC_LINK="https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/raw/feature/oke-tutorial-cluster/zips/"
+        MAGIC_LINK="https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/raw/main/zips/"
         for EXAMPLE_FOLDER in $FOLDERS;
         do
           RESOURCE=$(cut -d "/" -f 2 <<< "$EXAMPLE_FOLDER")
@@ -71,7 +71,7 @@ jobs:
         if [ -n "$(git status --porcelain)" ]; then
           git config --global user.name "shukawam"
           git config --global user.email "shukawam+github@gmail.com"
-          git pull origin feature/oke-tutorial-cluster
+          git pull origin main
           git add ./examples/*
           git add ./zips/*
           git commit -m "Added - README.md of service examples with magic button"

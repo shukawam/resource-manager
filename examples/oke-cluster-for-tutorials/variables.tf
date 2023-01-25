@@ -2,7 +2,7 @@ variable "compartment_id" {
   description = "compartment ocid"
 }
 variable "region" {
-  description = "oci region(e.g. ap-tokyo-1, etc.)"
+  description = "oci region(e.g. ap-tokyo-1, ap-osaka-1, etc.)"
 }
 
 variable "availability_domain_name" {
