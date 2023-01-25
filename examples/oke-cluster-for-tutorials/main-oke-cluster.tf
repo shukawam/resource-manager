@@ -5,25 +5,18 @@ resource "oci_containerengine_cluster" "tutorial_cluster" {
   name               = var.cluster_name
   vcn_id             = oci_core_vcn.tutorial_vcn.id
 
-  #Optional
   endpoint_config {
     subnet_id            = oci_core_subnet.k8s_api_endpoint_regional_subnet.id
     is_public_ip_enabled = "true"
-    nsg_ids              = [oci_core_network_security_group.tutorial_nsg.id]
   }
 
   options {
     service_lb_subnet_ids = [oci_core_subnet.lb_regional_subnet.id]
-
-    #Optional
     add_ons {
-      #Optional
       is_kubernetes_dashboard_enabled = var.cluster_options_add_ons_is_kubernetes_dashboard_enabled
       is_tiller_enabled               = var.cluster_options_add_ons_is_tiller_enabled
     }
-
     kubernetes_network_config {
-      #Optional
       pods_cidr     = var.cluster_options_kubernetes_network_config_pods_cidr
       services_cidr = var.cluster_options_kubernetes_network_config_services_cidr
     }
