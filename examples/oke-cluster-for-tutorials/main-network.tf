@@ -429,7 +429,7 @@ resource "oci_core_subnet" "k8s_api_endpoint_regional_subnet" {
   vcn_id            = oci_core_vcn.tutorial_vcn.id
   security_list_ids = [oci_core_security_list.k8s_api_endpoint_security_list.id]
   display_name      = "oke-k8sApiEndpoint-subnet"
-  route_table_id    = oci_core_route_table.default_route_table_id
+  route_table_id    = oci_core_vcn.tutorial_vcn.default_route_table_id
 }
 
 resource "oci_core_subnet" "node_pool_regional_subnet" {
@@ -438,7 +438,7 @@ resource "oci_core_subnet" "node_pool_regional_subnet" {
   vcn_id                     = oci_core_vcn.tutorial_vcn.id
   security_list_ids          = [oci_core_security_list.node_pool_security_list.id]
   display_name               = "oke-node-subnet"
-  route_table_id             = oci_core_route_table.default_route_table_id
+  route_table_id             = oci_core_vcn.tutorial_vcn.default_route_table_id
   prohibit_public_ip_on_vnic = var.subnet_prohibit_public_ip_on_vnic
 }
 
@@ -448,5 +448,5 @@ resource "oci_core_subnet" "lb_regional_subnet" {
   vcn_id            = oci_core_vcn.tutorial_vcn.id
   security_list_ids = [oci_core_security_list.lb_security_list.id]
   display_name      = "oke-svclb-subnet"
-  route_table_id    = oci_core_route_table.default_route_table_id
+  route_table_id    = oci_core_vcn.tutorial_vcn.default_route_table_id
 }
