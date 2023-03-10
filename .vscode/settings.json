@@ -1,0 +1,19 @@
+{
+  "json-yaml-schema-selector.additionalSchemas": [
+    "https://raw.githubusercontent.com/oracle-japan/resource-manager-knickknacks/main/schema/meta_schema.yaml",
+    {
+      "name": "Resource Manager Schema Document",
+      "description": "Resource Manager Schema Document",
+      "url": "https://raw.githubusercontent.com/oracle-japan/resource-manager-knickknacks/main/schema/meta_schema.yaml",
+      "fileMatch": [
+        "schema.yaml"
+      ]
+    }
+  ],
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/oracle-japan/resource-manager-knickknacks/main/schema/meta_schema.yaml": [
+      "examples/opensearch/schema.yaml",
+      "examples/opensearch/schema.yaml"
+    ]
+  }
+}

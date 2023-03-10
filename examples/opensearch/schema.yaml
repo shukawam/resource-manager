@@ -1,0 +1,116 @@
+# Title shown in Application Information tab.
+title: OpenSearch for Tutorial's Schema
+# Sub Title shown in Application Information tab.
+description: opensearch schema
+informationalText: opensearch schema
+schemaVersion: 1.1.0
+version: "20190304"
+
+source:
+  type: web
+
+locale: "en"
+variableGroups:
+  - title: "Common"
+    variables:
+      - ${compartment_ocid}
+      - ${region}
+      - ${availability_domain_name}
+
+  - title: "Compute"
+    variables:
+      - ${instance_display_name}
+      - ${instance_image_id}
+      - ${instance_shape}
+      - ${ssh_public_key}
+      - ${instance_source_type}
+
+  - title: "Network"
+    variables:
+      - ${security_list_ingress_security_rules_tcp_options_destination_port_api}
+      - ${security_list_ingress_security_rules_tcp_options_destination_port_dashboard}
+
+  - title: "OpenSearch Cluster"
+    variables:
+      - ${opensearch_cluster_data_node_count}
+      - ${opensearch_cluster_data_node_host_bare_metal_shape}
+      - ${opensearch_cluster_data_node_host_memory_gb}
+      - ${opensearch_cluster_data_node_host_ocpu_count}
+      - ${opensearch_cluster_data_node_host_type}
+      - ${opensearch_cluster_data_node_storage_gb}
+      - ${opensearch_cluster_display_name}
+      - ${opensearch_cluster_freeform_tags}
+      - ${opensearch_cluster_id}
+      - ${opensearch_cluster_master_node_count}
+      - ${opensearch_cluster_master_node_host_bare_metal_shape}
+      - ${opensearch_cluster_master_node_host_memory_gb}
+      - ${opensearch_cluster_master_node_host_ocpu_count}
+      - ${opensearch_cluster_opendashboard_node_count}
+      - ${opensearch_cluster_opendashboard_node_host_memory_gb}
+      - ${opensearch_cluster_opendashboard_node_host_ocpu_count}
+      - ${opensearch_cluster_software_version}
+      - ${opensearch_cluster_state}
+      - ${opensearch_cluster_system_tags}
+
+variables:
+  ### Common
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    required: true
+  region:
+    type: oci:identity:region:name
+    required: true
+  availability_domain_name:
+    type: oci:identity:availabilitydomain:name
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+
+  ### Compute
+  instance_display_name:
+    title: Display Name
+    type: string
+    default: "opensearch-bastion"
+    description: "Display name for OpenSearch bastion instance."
+    required: true
+  instance_image_id:
+    title: Instance Image ID
+    type: oci:core:image:id
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+  instance_shape:
+    title: Instance Shape
+    type: oci:core:instanceshapewithflex:name
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+  ssh_public_key:
+    title: SSH Public Key
+    type: oci:core:ssh:publickey
+    required: true
+  instance_source_type:
+    title: Source Type
+    type: string
+    default: "image"
+    visible: false
+
+  ### Network
+  security_list_ingress_security_rules_tcp_options_destination_port_api:
+    title: API Port
+    type: number
+    default: 9200
+    visible: false
+  security_list_ingress_security_rules_tcp_options_destination_port_dashboard:
+    title: Dashboard Port
+    type: number
+    default: 5601
+    visible: false
+
+  ### OpenSearch Cluster
+  opensearch_cluster_data_node_count:
+    title: Data Nodes
+    type: number
+    default: 1
+    visible: true
+  
