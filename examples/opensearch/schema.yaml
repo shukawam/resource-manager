@@ -82,6 +82,7 @@ variables:
   instance_shape:
     title: Instance Shape
     type: oci:core:instanceshapewithflex:name
+    default: VM.Standard.A1.Flex
     dependsOn:
       compartmentId: ${compartment_ocid}
     required: true
@@ -112,5 +113,79 @@ variables:
     title: Data Nodes
     type: number
     default: 1
-    visible: true
-  
+  opensearch_cluster_data_node_host_bare_metal_shape:
+    title: Data Node Bare Metal Shape
+    default: dataNodeHostBareMetalShape
+    type: string
+    visible: false
+  opeopensearch_cluster_data_node_host_memory_gb:
+    title: Data Node Memory
+    default: 20
+    type: number
+  opensearch_cluster_data_node_host_ocpu_count:
+    title: Data Node OCPU
+    default: 1
+    type: number
+  opensearch_cluster_data_node_host_type:
+    title: Data Node Host Type
+    default: FLEX
+    type: string
+    visible: false
+  opensearch_cluster_data_node_storage_gb:
+    title: Data Node Storage
+    default: 50
+    type: number
+  opensearch_cluster_display_name:
+    title: Cluster Display Name
+    default: Cluster
+    type: string
+    required: true
+  opensearch_cluster_id:
+    title: Cluster ID
+    default: id
+    type: string
+    visible: false
+  opensearch_cluster_master_node_count:
+    title: Master Node Count
+    type: number
+    default: 1
+  opensearch_cluster_master_node_host_bare_metal_shape:
+    title: Master Node Bare Metal Shape
+    default: masterNodeHostBareMetalShape
+    type: string
+    visible: false
+  opensearch_cluster_master_node_host_memory_gb:
+    title: Master Node Memory
+    default: 20
+    type: number
+  opensearch_cluster_master_node_host_ocpu_count:
+    title: Master Node OCPU
+    default: 1
+    type: number
+  opensearch_cluster_master_node_host_type:
+    title: Master Node Host Type
+    default: FLEX
+    type: string
+    visible: false
+  opensearch_cluster_opendashboard_node_count:
+    title: Dashboard Node Count
+    type: number
+    default: 1
+  opensearch_cluster_opendashboard_node_host_memory_gb:
+    title: Dashboard Memory
+    type: number
+    default: 8
+  opensearch_cluster_opendashboard_node_host_ocpu_count:
+    title: Dashboard OCPU
+    type: number
+    default: 1
+  opensearch_cluster_software_version:
+    title: OpenSearch Cluster Software Version
+    default: 1.2.4
+    type: string
+    visible: false
+  opensearch_cluster_state:
+    title: OpenSearch Cluster State
+    default: ACTIVE
+    type: string
+    visible: false
